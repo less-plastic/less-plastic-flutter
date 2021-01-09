@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:less_plastic/ui/HomeBloc.dart';
+import 'package:network/ApiConfiguration.dart';
+import 'package:network/flow/FlowDatasource.dart';
 
-import 'ui/Home.dart';
+import 'flow/FlowBloc.dart';
+import 'flow/FlowScreen.dart';
 
 class Routes {
   static const String HOME = '/';
@@ -13,14 +15,14 @@ class AppRouter {
     switch (settings.name) {
       case Routes.HOME:
         return MaterialPageRoute(
-            builder: (_) => BlocProvider<HomeBloc>(
-                  create: (_) => HomeBloc(),
-                  child: Home(
-                    title: "Title",
-                  ),
+            builder: (_) => BlocProvider<FlowBloc>(
+                  create: (_) => FlowBloc(
+                      flowRepository:
+                          FlowDatasource(configuration: ApiConfiguration())),
+                  child: FlowScreen(),
                 ));
       default:
-        return MaterialPageRoute(builder: (_) => Home());
+        return null;
     }
   }
 }
