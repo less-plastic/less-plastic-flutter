@@ -16,8 +16,13 @@ class Step {
         stepType = StepType.undefined;
         break;
     }
+
+    List<Step> options = [];
+    if (json['options'] != null) {
+      json['options'].forEach((jsonMap) => options.add(Step.fromJson(jsonMap)));
+    }
     return Step(
-        type: stepType, text: json['text'], id: json['id'], options: null);
+        type: stepType, text: json['text'], id: json['id'], options: options);
   }
 }
 

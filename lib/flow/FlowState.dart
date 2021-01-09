@@ -7,7 +7,7 @@ abstract class FlowState extends Equatable {
   FlowState({this.id});
 
   @override
-  List<Object> get props => throw UnimplementedError();
+  List<Object> get props => [id];
 }
 
 class StepFlowState extends FlowState {

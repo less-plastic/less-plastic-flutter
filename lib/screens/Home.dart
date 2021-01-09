@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:less_plastic/ui/HomeBloc.dart';
+import 'package:less_plastic/screens/HomeBloc.dart';
 
 class Home extends StatelessWidget {
   Home({Key key, this.title}) : super(key: key);
