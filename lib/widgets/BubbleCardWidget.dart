@@ -7,7 +7,7 @@ class BubbleCardWidget extends StatelessWidget {
   static const LEFT = MainAxisAlignment.start;
   static const RIGHT = MainAxisAlignment.end;
 
-  BubbleCardWidget({this.text, this.horizontalAlign});
+  BubbleCardWidget({@required this.text, this.horizontalAlign = LEFT});
 
   @override
   Widget build(BuildContext context) {

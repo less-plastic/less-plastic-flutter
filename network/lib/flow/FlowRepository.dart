@@ -5,5 +5,5 @@ abstract class FlowRepository {
 
   Future<Session> getSession(String sessionid);
 
-  void updateSession(String sessionid, Map<String, Object> params);
+  Future<void> updateSession(String sessionid, Map<String, Object> params);
 }

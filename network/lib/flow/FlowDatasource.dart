@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:network/flow/FlowRepository.dart';
 import 'package:network/model/Session.dart';
 import 'package:http/http.dart' as http;
+import 'package:network/utils/NetworkUtils.dart';
 
 import '../ApiConfiguration.dart';
 
@@ -12,30 +13,29 @@ class FlowDatasource implements FlowRepository {
 
   @override
   Future<Session> createSession() async {
-    return handleResponse(await http.post(configuration.HOST + 'flow'));
+    return handleResponse(await http.post('${configuration.HOST}flow'));
   }
 
   @override
   Future<Session> getSession(String sessionid) async {
-    return handleResponse(await http.get(configuration.HOST + 'flow'));
+    return handleResponse(
+        await http.get('${configuration.HOST}flow/$sessionid'));
   }
 
   @override
-  void updateSession(String sessionid, Map<String, Object> params) async {
-    var response = await http.patch(configuration.HOST + 'flow');
-    if (response.statusCode != 200) {
-      throw Exception('Failed to load album');
+  Future<void> updateSession(
+      String sessionid, Map<String, Object> params) async {
+    var response =
+        await http.patch('${configuration.HOST}flow/$sessionid', body: params);
+    if (!NetworkUtils.isValidResponse(response)) {
+      throw Exception('Failed to fetch data');
     }
   }
 
   Session handleResponse(http.Response response) {
-    if (response.statusCode == 200) {
-      // If the server did return a 200 OK response,
-      // then parse the JSON.
+    if (NetworkUtils.isValidResponse(response)) {
       return Session.fromJson(jsonDecode(response.body));
     } else {
-      // If the server did not return a 200 OK response,
-      // then throw an exception.
       throw Exception('Failed to load album');
     }
   }

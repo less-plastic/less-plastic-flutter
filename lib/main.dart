@@ -11,9 +11,8 @@ class Application extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.green,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
+          primarySwatch: Colors.green,
+          visualDensity: VisualDensity.adaptivePlatformDensity),
       onGenerateRoute: AppRouter().generateRoute,
       initialRoute: Routes.HOME,
     );
