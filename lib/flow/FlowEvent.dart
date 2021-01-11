@@ -13,10 +13,10 @@ class StartingFlowEvent extends FlowEvent {
   StartingFlowEvent() : super(id: "starting");
 }
 
-class SelectionFlowEvent extends FlowEvent {
+class UpdateFlowEvent extends FlowEvent {
   final String questionId;
   final String selectedId;
   final dynamic data;
-  SelectionFlowEvent({this.questionId, this.selectedId, this.data})
+  UpdateFlowEvent({this.questionId, this.selectedId, this.data})
       : super(id: selectedId);
 }

@@ -22,6 +22,12 @@ class SelectionFlowState extends FlowState {
   SelectionFlowState({this.step});
 }
 
+class NumberInputFlowSate extends FlowState {
+  final Step step;
+
+  NumberInputFlowSate({this.step});
+}
+
 class LoadingFlowState extends FlowState {
   LoadingFlowState() : super(id: 'loading');
 }

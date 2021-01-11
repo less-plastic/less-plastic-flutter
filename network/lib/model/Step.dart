@@ -12,6 +12,9 @@ class Step {
       case "selection":
         stepType = StepType.selection;
         break;
+      case "number":
+        stepType = StepType.number;
+        break;
       default:
         stepType = StepType.undefined;
         break;
@@ -26,4 +29,4 @@ class Step {
   }
 }
 
-enum StepType { selection, undefined }
+enum StepType { selection, number, undefined }

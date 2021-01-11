@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:less_plastic/flow/FlowEvent.dart';
 import 'package:less_plastic/widgets/BubbleCardWidget.dart';
+import 'package:less_plastic/widgets/InputCardWidget.dart';
 import 'package:less_plastic/widgets/LoadingWidget.dart';
 import 'package:less_plastic/widgets/SelectableCardWidget.dart';
 
@@ -26,7 +27,6 @@ class FlowScreen extends StatelessWidget {
                 // Loading state
                 return LoadingWidget();
               } else if (state is SelectionFlowState) {
-                // Selection state
                 var widgets = <Widget>[
                   BubbleCardWidget(
                     text: state.step.text,
@@ -37,12 +37,26 @@ class FlowScreen extends StatelessWidget {
                     .forEach((option) => widgets.add(SelectableCardWidget(
                         onTap: () {
                           BlocProvider.of<FlowBloc>(context).add(
-                              SelectionFlowEvent(
+                              UpdateFlowEvent(
                                   questionId: state.step.id,
                                   selectedId: option.id));
                         },
                         text: option.text,
                         horizontalAlign: SelectableCardWidget.LEFT)));
+                return Column(children: widgets);
+              } else if (state is NumberInputFlowSate) {
+                var widgets = <Widget>[
+                  BubbleCardWidget(
+                    text: state.step.text,
+                    horizontalAlign: BubbleCardWidget.RIGHT,
+                  )
+                ];
+                widgets.add(InputCardWidget(
+                  onTap: (data) {
+                    BlocProvider.of<FlowBloc>(context).add(
+                        UpdateFlowEvent(questionId: state.step.id, data: data));
+                  },
+                ));
                 return Column(children: widgets);
               } else {
                 // Null
